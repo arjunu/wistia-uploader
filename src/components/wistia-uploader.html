@@ -1,19 +1,22 @@
-<div>
+<div class="container">
     <span>Upload video:</span>
     <input class="fileupload" type="file" name="files[]"
            data-url="https://upload.wistia.com?api_password=e3c3801fd5f0da0dcce000e219539701be287435361cf7df9518f9298335a201&project_id=98jsqy9tvi">
 </div>
-<div ng-if="$ctrl.progress.show">
-    <span>Progress:</span>
-    {{$ctrl.progress.percent}}%
+
+<div ng-if="$ctrl.progress.show"
+     class="container progress_container">
+    <div class="progress_fill" ng-style="$ctrl.progress.style"></div>
 </div>
-<div ng-if="$ctrl.error.show">
-    <div>
-        <span>Error:</span>
-        <span>{{$ctrl.error.message}}</span>
-    </div>
+
+<div ng-if="$ctrl.error.show"
+     class="container error_container">
+    <span>Error:</span>
+    <span>{{$ctrl.error.message}}</span>
 </div>
-<div ng-if="$ctrl.player.show">
+
+<div ng-if="$ctrl.player.show"
+     class="container">
     <div class="wistia_embed" style="height: 300px; max-height: 300px;"
          id="{{$ctrl.player.id}}"></div>
 </div>

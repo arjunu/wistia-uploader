@@ -9,3 +9,24 @@
 body {
     margin: 15px;
 }
+
+.container {
+    margin: 5px 0;
+}
+
+.progress_container {
+    border: 1px solid #ccc;
+}
+
+.progress_fill {
+    color: #000;
+    background-color: #bbb;
+    height: 30px;
+}
+
+.error_container {
+    color: #D8000C;
+    background-color: #FFBABA;
+    padding: 5px;
+}
+

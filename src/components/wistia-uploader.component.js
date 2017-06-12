@@ -2,22 +2,23 @@ function wistiaUploaderController($scope, $element, $attrs) {
     var ctrl = this;
 
     ctrl.progress = {
-        show: true,
-        percent: 0
+        show: false,
+        style: {
+            width: "0%"
+        }
     };
 
     ctrl.error = {
-        show: true,
-        message: "failed to upload"
+        show: false,
+        message: "Failed to upload"
     };
 
     ctrl.player = {
-        show: true,
-        id: "123"
+        show: false,
+        id: null
     };
 
-    // this.$postLink = function () {
-        //add event listener to an element
+    this.$postLink = function () {
         var $input = $element.find('input.fileupload');
 
         $input.fileupload({
@@ -30,25 +31,26 @@ function wistiaUploaderController($scope, $element, $attrs) {
                 $scope.$apply();
             },
             done: function (e, data) {
-                var hash = "wistia_" + data.result.hashed_id;
-                ctrl.player.id = hash;
+                ctrl.progress.show = false;
+                var hash = data.result.hashed_id;
+                ctrl.player.id = "wistia_" + hash;
                 ctrl.player.show = true;
-                Wistia.embed(hash);
                 $scope.$apply();
+                Wistia.embed(hash);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR, textStatus, errorThrown)
                 ctrl.error.message = errorThrown;
+                ctrl.progress.show = false;
                 ctrl.error.show = true;
                 $scope.$apply();
             },
             progress: function (e, data) {
-                ctrl.progress = parseInt(data.loaded / data.total * 100, 10);
+                ctrl.progress.style.width = parseInt(data.loaded / data.total * 100, 10) + "%";
                 $scope.$apply();
             }
         });
 
-    // };
+    };
 }
 
 angular.module('processStreet').component('wistiaUploader', {
